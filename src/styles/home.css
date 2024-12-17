@@ -1,0 +1,40 @@
+.layout{
+    min-height: 100vh;
+}
+.overflow-x-scroll{
+    overflow-x: scroll;
+}
+.card{
+    display: inline-block;
+}
+.card img, .card-body{
+    width: 400px;
+}
+.fav-btn{
+    border-color: #ffc107;
+}
+.fav-btn .fa-heart{
+    color: #ffc107;
+}
+.fav-btn:hover{
+    background-color: #ffc107;
+}
+.fav-btn:hover .fa-heart{
+    color: black;
+}
+.details-btn{
+    border-width: 2px;
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+.details-btn:hover{
+    background-color: #0d6efd;
+    color: white;
+}
+.object-fit-contain{
+    object-fit: contain;
+}
+/* .overflow-x-scroll::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 10px;
+}*/
