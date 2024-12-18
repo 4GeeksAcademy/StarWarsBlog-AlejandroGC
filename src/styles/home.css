@@ -8,7 +8,7 @@
     display: inline-block;
 }
 .card img, .card-body{
-    width: 400px;
+    max-width: 400px;
 }
 .fav-btn{
     border-color: #ffc107;
@@ -38,3 +38,19 @@
     background: grey; 
     border-radius: 10px;
 }*/
+
+@media (max-width: 426px) {
+    .card img{
+        width: 200px;
+    }
+}
+@media (min-width: 426px) and (max-width: 768px) {
+    .card img{
+        width: 300px;
+    }
+}
+@media (min-width: 769px) {
+    .card img{
+        width: 400px;
+    }
+}

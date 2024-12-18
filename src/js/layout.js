@@ -15,14 +15,10 @@ const Layout = () => {
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
 
-	const {store,actions} = useContext(Context);
+	const {actions} = useContext(Context);
 
-	useEffect(()=>{actions.getResources()},[]);
-	useEffect(()=>{
-		store.resources.map((item)=>{
-			actions.getNames(item);
-		})
-	},[store.resources]);
+	
+	
 
 	return (
 		<div className="layout bg-dark">

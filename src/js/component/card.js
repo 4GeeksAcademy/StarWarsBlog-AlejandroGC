@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 const Card = ({type,item}) => {
-    const [fav, setFav] = useState(false);
+    const {store, actions} = useContext(Context);
 
     return (
         <>
@@ -11,7 +12,7 @@ const Card = ({type,item}) => {
                 <h5 className="card-title pb-2">{item.name}</h5>
                 <div className="d-flex justify-content-between">
                     <Link to={"/details/"+type+"/"+item.uid}><button className="details-btn btn" >Learn More!</button></Link>
-                    <button onClick={()=>setFav(!fav)} className="fav-btn rounded px-3"><i className={(fav ? "fa-solid" : "fa-regular") + " fa-heart"}></i></button>
+                    <button onClick={()=>actions.handleFav(store.favourites.some((value)=>item.name === value), item)} className="fav-btn rounded px-3"><i className={(store.favourites.some((value)=>item.name === value) ? "fa-solid" : "fa-regular") + " fa-heart"}></i></button>
                 </div>
             </div>
         </>

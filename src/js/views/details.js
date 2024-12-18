@@ -9,8 +9,30 @@ export const Details = () => {
 	const {store} = useContext(Context);
 
 	const [details, setDetails] = useState({})
-	const [info, setInfo] = useState({})
+	const [infoStack, setInfoStack] = useState([])
 	const {type,id} = useParams();
+	
+
+	const infoToShow = () => {
+		switch (type) {
+			case "people":
+				setInfoStack(["Name", "Birth Year", "Gender", "Height", "Skin Color", "Eye Color"]);
+				break;
+			case "planets":
+				setInfoStack(["Name", "Climate", "Population", "Orbital Period", "Rotation Period", "Diameter"]);
+				break;
+			case "species":
+				setInfoStack(["Name", "Classification", "Designation", "Language"]);
+				break;
+			case "starships":
+			case "vehicles":
+				setInfoStack(["Name", "Passengers", "Consumables", "Cargo Capacity", "Crew", "Length"]);
+				break;
+			default:
+				setInfoStack(["Name"]);
+				break;
+		}
+	}
 
 	const getDetails = async (type, id) => {
 		fetch(store.baseURL+type+"/"+id)
@@ -24,6 +46,7 @@ export const Details = () => {
 
 	useEffect(()=>{
 		getDetails(type,id);
+		infoToShow();
 	},[])
 	
 
@@ -39,25 +62,15 @@ export const Details = () => {
 				</div>
 			</div>
 			<hr className="border border-danger my-4"/>
-			<div className="row">
-				<div className="col-4 col-md-2 mb-5">
-					<h5 className="text-danger text-center">Name<br/><br/>{details.name}</h5>
-				</div>
-				<div className="col-4 col-md-2">
-					<h5 className="text-danger text-center">Birth Year<br/><br/>{details.birth_year}</h5>
-				</div>
-				<div className="col-4 col-md-2">
-					<h5 className="text-danger text-center">Gender<br/><br/>{details.gender}</h5>
-				</div>
-				<div className="col-4 col-md-2">
-					<h5 className="text-danger text-center">Height<br/><br/>{details.height}</h5>
-				</div>
-				<div className="col-4 col-md-2">
-					<h5 className="text-danger text-center">Skin Color<br/><br/>{details.skin_color}</h5>
-				</div>
-				<div className="col-4 col-md-2">
-					<h5 className="text-danger text-center">Eye Color<br/><br/>{details.eye_color}</h5>
-				</div>
+			<div className="row d-flex justify-content-center">
+				{infoStack.map((text, index)=>{
+					return (
+						<div key={index} className="col-6 col-md-4 col-lg-2">
+							<h5 className="text-danger text-center">{text}</h5>
+							<h5 className="text-danger text-center mb-5 fw-normal">{details[text.replace(" ", "_").toLowerCase()]}</h5>
+						</div>
+					)
+				})}
 			</div>
 		</div>
 	);
