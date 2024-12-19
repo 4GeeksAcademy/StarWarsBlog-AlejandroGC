@@ -39,25 +39,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addFav: (item) => {
 				setStore({favourites: getStore().favourites.concat(item.name)});
-				console.log(getStore().favourites);
-				
 			},
 			deleteFav: (item) => {
 				let aux = [...getStore().favourites];
 				let index = aux.findIndex((name)=>name === item.name)
 				aux.splice(index, 1);
 				setStore({favourites: aux});
-				console.log(getStore().favourites);
 			},
-			deleteFavLi: (index) => {
+			deleteFavBox: (index) => {
 				let aux = [...getStore().favourites];
 				aux.splice(index, 1);
 				setStore({favourites: aux});
-				console.log(getStore().favourites);
 			},
 			loadData: (data) => {
 				console.log("Carga de local store");
-				
 				setStore({[`${data}`]: JSON.parse(localStorage.getItem(data))});
 			}
 		}
