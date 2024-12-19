@@ -15,11 +15,6 @@ const Layout = () => {
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
 
-	const {actions} = useContext(Context);
-
-	
-	
-
 	return (
 		<div className="layout bg-dark">
 			<BrowserRouter basename={basename}>
@@ -29,7 +24,7 @@ const Layout = () => {
 					<Route path="/details/:type/:id" element={<Details />} />
 					<Route path="*" element={<h1>Not found!</h1>} />
 				</Routes>
-				{/* <Footer /> */}
+				<Footer />
 			</BrowserRouter>
 		</div>
 	);

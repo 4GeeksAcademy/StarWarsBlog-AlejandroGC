@@ -8,14 +8,11 @@ export const Home = () => {
 	const {store,actions} = useContext(Context);
 
 	useEffect(()=>{
-		localStorage.getItem("resources") ? actions.loadData() : actions.getResources();
-	},[]);
-
-	useEffect(()=>{
+		localStorage.getItem("resources") ? actions.loadData("resources") : actions.getResources();
 		store.resources.map((item)=>{
-			actions.getNames(item);
+			localStorage.getItem(item) ? actions.loadData(item) : actions.getNames(item);
 		})
-	},[store.resources]);
+	},[]);
 
 	return (
 		<div className="container mt-3 d-flex flex-column">

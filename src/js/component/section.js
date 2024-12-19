@@ -1,6 +1,5 @@
-import React, {useState,useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import Card from "./card";
 
 export const Section = ({title}) => {

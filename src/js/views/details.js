@@ -38,6 +38,7 @@ export const Details = () => {
 		fetch(store.baseURL+type+"/"+id)
 				.then(res => res.json())
 				.then(data => {
+					localStorage.setItem(type+id,JSON.stringify(data.result.properties))
 					setDetails(data.result.properties);
 					console.log(data.result);
 				})
@@ -45,7 +46,7 @@ export const Details = () => {
 	}
 
 	useEffect(()=>{
-		getDetails(type,id);
+		localStorage.getItem(type+id) ? setDetails(JSON.parse(localStorage.getItem(type+id))) : getDetails(type,id);
 		infoToShow();
 	},[])
 	

@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(res => res.json())
 				.then(data => {
 					console.log("Fetch");
-					localStorage.setItem("resources",data.result);
+					localStorage.setItem("resources", JSON.stringify(Object.keys(data.result)));
 					setStore({resources: Object.keys(data.result)});
 				})
 				.catch(err => console.error(err));
@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(getStore().baseURL+resource)
 					.then(res => res.json())
 					.then(data => {
-						localStorage.setItem([`${resource}`],data.result);
+						resource !== "films" ? localStorage.setItem([`${resource}`],JSON.stringify(data.results)) : localStorage.setItem([`${resource}`],JSON.stringify(data.result));
 						resource !== "films" ? setStore({[`${resource}`]: data.results}) : setStore({[`${resource}`]: data.result});
 						console.log(getStore()[resource]);
 					})
@@ -55,16 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({favourites: aux});
 				console.log(getStore().favourites);
 			},
-			loadData: () => {
+			loadData: (data) => {
 				console.log("Carga de local store");
 				
-				setStore({"resources": localStorage.getItem("resources")});
-				setStore({"films": localStorage.getItem("films")});
-				setStore({"people": localStorage.getItem("people")});
-				setStore({"planets": localStorage.getItem("planets")});
-				setStore({"species": localStorage.getItem("species")});
-				setStore({"starships": localStorage.getItem("starships")});
-				setStore({"vehicles": localStorage.getItem("vehicles")});
+				setStore({[`${data}`]: JSON.parse(localStorage.getItem(data))});
 			}
 		}
 	};
